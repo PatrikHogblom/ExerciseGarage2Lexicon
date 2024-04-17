@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Svenne Garage Parking</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -13,10 +13,12 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.VehicleType)
+                @Html.DisplayName("Vehicle Type")
+                @* @Html.DisplayNameFor(model => model.VehicleType) *@
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.RegistrationNumber)
+                @Html.DisplayName("Registration Number")
+                @* @Html.DisplayNameFor(model => model.RegistrationNumber) *@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Color)
@@ -28,10 +30,12 @@
                 @Html.DisplayNameFor(model => model.Model)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.NumberOfWheels)
+                @Html.DisplayName("Number of wheels")
+                @* @Html.DisplayNameFor(model => model.NumberOfWheels) *@
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ArrivalTime)
+                @Html.DisplayName("Arrival Time")
+                @* @Html.DisplayNameFor(model => model.ArrivalTime) *@
             </th>
             <th></th>
         </tr>
