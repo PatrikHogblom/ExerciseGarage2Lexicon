@@ -34,7 +34,7 @@ namespace ExerciseGarage2Lexicon
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=ParkedVehicles}/{action=Index}/{id?}");
 
            DbInitalizer.Seed(app);
 
