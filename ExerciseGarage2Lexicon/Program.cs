@@ -1,3 +1,6 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using ExerciseGarage2Lexicon.Data;
 namespace ExerciseGarage2Lexicon
 {
     public class Program
@@ -5,6 +8,8 @@ namespace ExerciseGarage2Lexicon
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            builder.Services.AddDbContext<ExerciseGarage2LexiconContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("ExerciseGarage2LexiconContext") ?? throw new InvalidOperationException("Connection string 'ExerciseGarage2LexiconContext' not found.")));
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
