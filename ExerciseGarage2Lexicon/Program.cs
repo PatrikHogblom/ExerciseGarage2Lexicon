@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using ExerciseGarage2Lexicon.Data;
+using ExerciseGarage2Lexicon.Models;
 namespace ExerciseGarage2Lexicon
 {
     public class Program
@@ -34,6 +35,8 @@ namespace ExerciseGarage2Lexicon
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
+
+           DbInitalizer.Seed(app);
 
             app.Run();
         }
