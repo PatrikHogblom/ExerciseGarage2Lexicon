@@ -56,13 +56,20 @@ namespace ExerciseGarage2Lexicon.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,VehicleType,RegistrationNumber,Color,Brand,Model,NumberOfWheels,ArrivalTime")] ParkedVehicle parkedVehicle)
         {
-            if (ModelState.IsValid)
+            try {
+                if (ModelState.IsValid)
+                {
+                    _context.Add(parkedVehicle);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                return View(parkedVehicle);
+            } 
+            catch (DbUpdateException ex) 
             {
-                _context.Add(parkedVehicle);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return BadRequest(ex.Message);
+                //return View(parkedVehicle);
             }
-            return View(parkedVehicle);
         }
 
         // GET: ParkedVehicles/Edit/5

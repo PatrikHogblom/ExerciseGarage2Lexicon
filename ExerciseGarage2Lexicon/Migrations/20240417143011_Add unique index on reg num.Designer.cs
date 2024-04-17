@@ -4,6 +4,7 @@ using ExerciseGarage2Lexicon.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExerciseGarage2Lexicon.Migrations
 {
     [DbContext(typeof(ExerciseGarage2LexiconContext))]
-    partial class ExerciseGarage2LexiconContextModelSnapshot : ModelSnapshot
+    [Migration("20240417143011_Add unique index on reg num")]
+    partial class Adduniqueindexonregnum
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
