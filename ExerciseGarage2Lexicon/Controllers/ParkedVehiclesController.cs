@@ -58,6 +58,7 @@ namespace ExerciseGarage2Lexicon.Controllers
         {
             if (ModelState.IsValid)
             {
+                parkedVehicle.RegistrationNumber = parkedVehicle.RegistrationNumber.ToUpper();
                 _context.Add(parkedVehicle);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
