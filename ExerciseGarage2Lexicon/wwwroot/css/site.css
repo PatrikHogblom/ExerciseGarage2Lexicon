@@ -18,5 +18,73 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    background-image: url('/Image/parking_garage.jpg');
+    background-size: cover;
 }
+
+footer{
+    background-color: aliceblue;
+}
+
+title{
+    background-color: black;
+}
+
+/* CSS för att ändra textfärgen på headers och länkar */
+h1, h2, h3, h4, h5, h6 {
+    color: #ffffff; /* Vit färg för text */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Textskugga */
+}
+
+/* Stärker färgen på texten för "Vehicle Type", "Registration Number" etc. */
+.table th {
+    color: #ffffff;
+    font-weight: bold;
+}
+
+/* Stärker färgen på texten i tabellceller under "Vehicle Type" och andra tabellhuvuden */
+.table td {
+    /*color: #540fc6;*/
+    color: #ffffff;
+    font-weight: bold;
+}
+
+
+
+
+/* Stärker färgen på länkar för "Edit", "Details" och "UnPark" */
+a[href*="Edit"] {
+    color: blue;
+    font-weight: bold;
+}
+
+a[href*="Details"] {
+    color: blue;
+    font-weight: bold;
+}
+
+a[href*="Delete"] {
+    color: blue;
+    font-weight: bold;
+}
+
+/* Ändra färgen när användaren hovrar över länkar */
+a[href*="Edit"]:hover {
+    color: #0056b3; /* Mörkare nyans av blått för hover-effekt på Edit-länkar */
+}
+
+a[href*="Details"]:hover {
+    color: #0056b3; /* Mörkare nyans av blått för hover-effekt på Details-länkar */
+}
+
+a[href*="Delete"]:hover {
+    color: #0056b3; /* Mörkare nyans av blått för hover-effekt på Delete-länkar */
+}
+
+
+/* Stärker färgen på label-elementen */
+.form-group label.control-label {
+    color: #ffffff;
+}
+

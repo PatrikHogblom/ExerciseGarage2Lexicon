@@ -15,4 +15,12 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\Image\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\Image\parking_garage.jpg" />
+  </ItemGroup>
+
 </Project>
