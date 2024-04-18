@@ -80,32 +80,16 @@ namespace ExerciseGarage2Lexicon.Controllers
                     parkedVehicle.RegistrationNumber = parkedVehicle.RegistrationNumber.ToUpper();
                     _context.Add(parkedVehicle);
                     await _context.SaveChangesAsync();
-                    //return RedirectToAction(nameof(Index));
-
-                    // Feedback with ViewBag:
-                    // ViewBag.Message = "Your vehicle was parked!";
-                    // ViewBag.MessageType = "success";
-
+                
                     SetFeedback("success", "Your vehicle was parked!");
                     return View();
-
-                    // Feedback with a separate view:
-                    // feedbackModel = GetFeedback("success", "Your vehicle was parked!");
-                    // return View("Feedback", feedbackModel);
                 }
                 return View(parkedVehicle);
             } 
             catch (DbUpdateException) 
             {
-                // Feedback with ViewBag:
-                // ViewBag.Message = "A vehicle with that registration is already parked in the garage";
-                // ViewBag.MessageType = "danger";
                 SetFeedback("danger", "A vehicle with that registration is already parked in the garage");
                 return View();
-
-                // With a separate view:
-                // feedbackModel = GetFeedback("danger", "A vehicle with that registration is already parked in the garage.");
-                // return View("Feedback", feedbackModel); 
             }
         }
 
