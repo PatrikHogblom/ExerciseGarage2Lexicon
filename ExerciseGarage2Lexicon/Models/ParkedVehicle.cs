@@ -1,5 +1,9 @@
-﻿namespace ExerciseGarage2Lexicon.Models
+﻿using Microsoft.EntityFrameworkCore;
+using System.Security.Policy;
+
+namespace ExerciseGarage2Lexicon.Models
 {
+    [Index(nameof(RegistrationNumber), IsUnique = true)]
     public class ParkedVehicle
     {
         public int Id { get; set; }
