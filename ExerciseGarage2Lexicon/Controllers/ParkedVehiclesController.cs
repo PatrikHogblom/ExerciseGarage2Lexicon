@@ -19,6 +19,22 @@ namespace ExerciseGarage2Lexicon.Controllers
             _context = context;
         }
 
+        //filter/search a regnumber
+        [HttpGet]
+        public async Task<IActionResult> SearchRegNumber(string regNumber)
+        {
+            //filter out vehicles according to the reg number
+            var model = string.IsNullOrWhiteSpace(regNumber) ? _context.ParkedVehicle :
+                        _context.ParkedVehicle.Where(currVal => currVal.RegistrationNumber.Contains(regNumber.ToUpper().Trim()));
+
+            if (!model.Any())
+            {
+                ViewBag.NoVehiclesFound = "No vehicles found with the specified registration number.";
+            }
+
+            return View(nameof(Index), await model.ToListAsync());
+        }
+
         // GET: ParkedVehicles
         public async Task<IActionResult> Index()
         {
