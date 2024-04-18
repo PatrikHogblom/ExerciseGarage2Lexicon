@@ -37,7 +37,7 @@ namespace ExerciseGarage2Lexicon.Controllers
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (parkedVehicle == null)
             {
-                return NotFound();
+                return NotFound("No vehicle with that id found");
             }
 
             return View(parkedVehicle);
@@ -56,21 +56,54 @@ namespace ExerciseGarage2Lexicon.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,VehicleType,RegistrationNumber,Color,Brand,Model,NumberOfWheels,ArrivalTime")] ParkedVehicle parkedVehicle)
         {
+            //ViewBag.Error = null;
+            FeedbackViewModel feedbackModel;
+
             try {
                 if (ModelState.IsValid)
                 {
                     _context.Add(parkedVehicle);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
+                    //return RedirectToAction(nameof(Index));
+
+                    //feedbackModel = new FeedbackViewModel
+                    //{
+                    //    Message = "Your vehicle was parked!",
+                    //    MessageType = "success"
+                    //};
+                    feedbackModel = GetFeedback("success", "Your vehicle was parked!");
+
+                    return View("Feedback", feedbackModel);
                 }
                 return View(parkedVehicle);
             } 
             catch (DbUpdateException ex) 
             {
-                return BadRequest(ex.Message);
-                //return View(parkedVehicle);
+                //return BadRequest(ex.Message);
+                //ViewBag.Error = "A vehicle with that registration is already parked in the garage";
+                //return View();
+
+                // If an error occurs, prepare a feedback message
+                feedbackModel = new FeedbackViewModel
+                {
+                    Message = "A vehicle with that registration is already parked in the garage.",
+                    MessageType = "danger" // Bootstrap alert type
+                };
+                // Return the Feedback.cshtml view with the feedback model
+                return View("Feedback", feedbackModel); 
             }
         }
+
+        private FeedbackViewModel GetFeedback(string messageType, string message)
+        {
+            var feedbackModel = new FeedbackViewModel
+            {
+                Message = message,
+                MessageType = messageType
+            };
+            return feedbackModel;
+        }
+
 
         // GET: ParkedVehicles/Edit/5
         public async Task<IActionResult> Edit(int? id)
