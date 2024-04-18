@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using ExerciseGarage2Lexicon.Data;
 using ExerciseGarage2Lexicon.Models;
+using System.Configuration;
 namespace ExerciseGarage2Lexicon
 {
     public class Program
@@ -25,6 +26,7 @@ namespace ExerciseGarage2Lexicon
                 app.UseHsts();
             }
 
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
@@ -39,6 +41,8 @@ namespace ExerciseGarage2Lexicon
            DbInitalizer.Seed(app);
 
             app.Run();
+
+
         }
     }
 }
