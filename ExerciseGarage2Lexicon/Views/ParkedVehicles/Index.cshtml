@@ -9,6 +9,20 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+
+<form asp-action="SearchRegNumber" asp-controller="ParkedVehicles" method="get">
+    <div class="input-group">
+        <input type="text" id="regNumberSearch" name="regNumber" class="form-control" placeholder="Search for registration number" />
+        <div class="input-group-append">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </div>
+    @if (!string.IsNullOrEmpty(ViewBag.NoVehiclesFound))
+    {
+        <div class="alert alert-danger">@ViewBag.NoVehiclesFound</div>
+    }
+</form>
+
 <table class="table">
     <thead>
         <tr>
