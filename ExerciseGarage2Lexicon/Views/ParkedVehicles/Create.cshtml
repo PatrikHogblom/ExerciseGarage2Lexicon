@@ -12,9 +12,17 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+           
+            @* dropdown for vehicles *@
             <div class="form-group">
-                <label asp-for="VehicleType" class="control-label"></label>
-                <input asp-for="VehicleType" class="form-control" />
+                <select asp-for="VehicleType" class="form-control">
+                    <option value="">Select vehicle type</option>
+                
+                    @foreach (var type in VehicleHelper.GetVehicleTypes())
+                    {
+                        <option value="@type">@type</option>
+                    }
+                </select>
                 <span asp-validation-for="VehicleType" class="text-danger"></span>
             </div>
             <div class="form-group">
