@@ -56,7 +56,7 @@ namespace ExerciseGarage2Lexicon.Migrations
 
                     b.Property<string>("RegistrationNumber")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("TotalParkingTimeInMinutes")
                         .HasColumnType("float");
@@ -67,10 +67,7 @@ namespace ExerciseGarage2Lexicon.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RegistrationNumber")
-                        .IsUnique();
-
-                    b.ToTable("ParkedVehicle");
+                    b.ToTable("ParkedVehicle", (string)null);
                 });
 #pragma warning restore 612, 618
         }
