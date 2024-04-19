@@ -33,20 +33,20 @@ title{
 
 /* CSS för att ändra textfärgen på headers och länkar */
 h1, h2, h3, h4, h5, h6 {
-    color: #ffffff; /* Vit färg för text */
+    color: black; /* Vit färg för text */
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Textskugga */
 }
 
 /* Stärker färgen på texten för "Vehicle Type", "Registration Number" etc. */
 .table th {
-    color: #ffffff;
+    color: black;
     font-weight: bold;
 }
 
 /* Stärker färgen på texten i tabellceller under "Vehicle Type" och andra tabellhuvuden */
 .table td {
     /*color: #540fc6;*/
-    color: #ffffff;
+    color: black;
     font-weight: bold;
 }
 
@@ -85,6 +85,14 @@ a[href*="Delete"]:hover {
 
 /* Stärker färgen på label-elementen */
 .form-group label.control-label {
-    color: #ffffff;
+    color: black;
+    font-weight: bold;
 }
 
+.BoxAroundLayout {
+    background-color: #f0f0f0; /* Anpassa bakgrundsfärgen efter behov */
+    padding: 20px; /* Justera padding efter behov för att ge utrymme runt innehållet */
+    border-radius: 5px; /* Om du vill ha avrundade kanter på boxen */
+    border: 1px solid #ccc; /* Om du vill ha en ram runt boxen */
+    margin-bottom: 20px; /* Lägg till marginal nedanför boxen för att separera den från andra innehåll */
+}

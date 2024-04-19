@@ -3,87 +3,88 @@
 @{
     ViewData["Title"] = "Index";
 }
+<div class="BoxAroundLayout">
+    <h1>Svenne Garage Parking</h1>
 
-<h1>Svenne Garage Parking</h1>
+    <p>
+        <a asp-action="Create">Park your Vehicle</a>
+    </p>
 
-<p>
-    <a asp-action="Create">Park your Vehicle</a>
-</p>
-
-<form asp-action="SearchRegNumber" asp-controller="ParkedVehicles" method="get">
-    <div class="input-group">
-        <input type="text" id="regNumberSearch" name="regNumber" class="form-control" placeholder="Search for registration number" />
-        <div class="input-group-append">
-            <button type="submit" class="btn btn-primary">Search</button>
+    <form asp-action="SearchRegNumber" asp-controller="ParkedVehicles" method="get">
+        <div class="input-group">
+            <input type="text" id="regNumberSearch" name="regNumber" class="form-control" placeholder="Search for registration number" />
+            <div class="input-group-append">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
         </div>
-    </div>
-    @if (!string.IsNullOrEmpty(ViewBag.NoVehiclesFound))
-    {
-        <div class="alert alert-danger">@ViewBag.NoVehiclesFound</div>
-    }
-</form>
+        @if (!string.IsNullOrEmpty(ViewBag.NoVehiclesFound))
+        {
+            <div class="alert alert-danger">@ViewBag.NoVehiclesFound</div>
+        }
+    </form>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayName("Vehicle Type")
-                @* @Html.DisplayNameFor(model => model.VehicleType) *@
-            </th>
-            <th>
-                @Html.DisplayName("Registration Number")
-                @* @Html.DisplayNameFor(model => model.RegistrationNumber) *@
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Color)
-            </th>
-              <th>
-                @Html.DisplayNameFor(model => model.Brand)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Model)
-            </th>
-            <th>
-                @Html.DisplayName("Number of wheels")
-                @* @Html.DisplayNameFor(model => model.NumberOfWheels) *@
-            </th>
-            <th>
-                @Html.DisplayName("Arrival Time")
-                @* @Html.DisplayNameFor(model => model.ArrivalTime) *@
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.VehicleType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RegistrationNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Color)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Brand)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Model)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumberOfWheels)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ArrivalTime)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> | 
-                <a asp-action="CheckoutAndGenerateReceipt" asp-route-id="@item.Id">Checkout</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayName("Vehicle Type")
+                    @* @Html.DisplayNameFor(model => model.VehicleType) *@
+                </th>
+                <th>
+                    @Html.DisplayName("Registration Number")
+                    @* @Html.DisplayNameFor(model => model.RegistrationNumber) *@
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Color)
+                </th>
+                  <th>
+                    @Html.DisplayNameFor(model => model.Brand)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Model)
+                </th>
+                <th>
+                    @Html.DisplayName("Number of wheels")
+                    @* @Html.DisplayNameFor(model => model.NumberOfWheels) *@
+                </th>
+                <th>
+                    @Html.DisplayName("Arrival Time")
+                    @* @Html.DisplayNameFor(model => model.ArrivalTime) *@
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VehicleType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RegistrationNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Color)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Brand)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Model)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumberOfWheels)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ArrivalTime)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> | 
+                    <a asp-action="CheckoutAndGenerateReceipt" asp-route-id="@item.Id">Checkout</a>
+                </td>
+            </tr>
+    }
+        </tbody>
+    </table>
+</div>
