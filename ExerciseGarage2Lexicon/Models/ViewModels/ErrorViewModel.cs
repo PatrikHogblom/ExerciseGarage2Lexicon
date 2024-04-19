@@ -1,4 +1,4 @@
-namespace ExerciseGarage2Lexicon.Models
+namespace ExerciseGarage2Lexicon.Models.ViewModels
 {
     public class ErrorViewModel
     {

@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ExerciseGarage2Lexicon.Data;
 using ExerciseGarage2Lexicon.Models;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using ExerciseGarage2Lexicon.Models.ViewModels;
 
 
 namespace ExerciseGarage2Lexicon.Controllers
@@ -73,47 +75,29 @@ namespace ExerciseGarage2Lexicon.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,VehicleType,RegistrationNumber,Color,Brand,Model,NumberOfWheels,ArrivalTime")] ParkedVehicle parkedVehicle)
         {
-            //ViewBag.Error = null;
-            FeedbackViewModel feedbackModel;
-
             try {
                 if (ModelState.IsValid)
                 {
                     parkedVehicle.RegistrationNumber = parkedVehicle.RegistrationNumber.ToUpper();
                     _context.Add(parkedVehicle);
                     await _context.SaveChangesAsync();
-                    //return RedirectToAction(nameof(Index));
-
-                    //feedbackModel = new FeedbackViewModel
-                    //{
-                    //    Message = "Your vehicle was parked!",
-                    //    MessageType = "success"
-                    //};
-                    feedbackModel = GetFeedback("success", "Your vehicle was parked!");
-
-                    return View("Feedback", feedbackModel);
+                
+                    SetFeedback("success", "Your vehicle was parked!");
+                    return View();
                 }
                 return View(parkedVehicle);
             } 
-            catch (DbUpdateException ex) 
+            catch (DbUpdateException) 
             {
-                //return BadRequest(ex.Message);
-                //ViewBag.Error = "A vehicle with that registration is already parked in the garage";
-                //return View();
-
-                // If an error occurs, prepare a feedback message
-                feedbackModel = new FeedbackViewModel
-                {
-                    Message = "A vehicle with that registration is already parked in the garage.",
-                    MessageType = "danger" // Bootstrap alert type
-                };
-                // Return the Feedback.cshtml view with the feedback model
-                return View("Feedback", feedbackModel); 
+                SetFeedback("danger", "A vehicle with that registration is already parked in the garage");
+                return View();
             }
         }
 
+        // HELPER METHODS TO BE REMOVED TO OTHER FILE??
         private FeedbackViewModel GetFeedback(string messageType, string message)
         {
+            // Prepare a feedback message
             var feedbackModel = new FeedbackViewModel
             {
                 Message = message,
@@ -121,8 +105,26 @@ namespace ExerciseGarage2Lexicon.Controllers
             };
             return feedbackModel;
         }
+        private void SetFeedback(string messageType, string message)
+        {
+            ViewBag.Message = message;
+            ViewBag.MessageType = messageType;
+        }
+        ////////////////
 
+        // GET: Summary
+        public async Task<IActionResult> Summary()
+        {
+            var vehicles = _context.ParkedVehicle.Select(vehicle => new SummaryViewModel
+            {
+                VehicleType = vehicle.VehicleType,
+                RegistrationNumber = vehicle.RegistrationNumber,
+                ArrivalTime = vehicle.ArrivalTime,
+                TotalParkingTime = (DateTime.Now - vehicle.ArrivalTime).TotalMinutes
+        });
 
+            return View(await vehicles.ToListAsync());
+        }
         // GET: ParkedVehicles/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
