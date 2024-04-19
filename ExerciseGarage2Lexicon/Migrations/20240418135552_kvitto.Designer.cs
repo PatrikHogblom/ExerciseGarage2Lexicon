@@ -4,6 +4,7 @@ using ExerciseGarage2Lexicon.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExerciseGarage2Lexicon.Migrations
 {
     [DbContext(typeof(ExerciseGarage2LexiconContext))]
-    partial class ExerciseGarage2LexiconContextModelSnapshot : ModelSnapshot
+    [Migration("20240418135552_kvitto")]
+    partial class kvitto
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -56,7 +59,7 @@ namespace ExerciseGarage2Lexicon.Migrations
 
                     b.Property<string>("RegistrationNumber")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("TotalParkingTimeInMinutes")
                         .HasColumnType("float");
@@ -66,9 +69,6 @@ namespace ExerciseGarage2Lexicon.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("RegistrationNumber")
-                        .IsUnique();
 
                     b.ToTable("ParkedVehicle");
                 });

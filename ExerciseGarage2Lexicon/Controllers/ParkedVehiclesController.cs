@@ -10,6 +10,7 @@ using ExerciseGarage2Lexicon.Models;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using ExerciseGarage2Lexicon.Models.ViewModels;
 
+
 namespace ExerciseGarage2Lexicon.Controllers
 {
     public class ParkedVehiclesController : Controller
@@ -200,5 +201,45 @@ namespace ExerciseGarage2Lexicon.Controllers
         {
             return _context.ParkedVehicle.Any(e => e.Id == id);
         }
+
+        // Adding Kvitto Generation Logic
+        public async Task<IActionResult> CheckoutAndGenerateReceipt(int? id)
+        {
+            if (id == null) return NotFound();
+
+            var parkedVehicle = await _context.ParkedVehicle.FindAsync(id);
+            if (parkedVehicle == null) return NotFound();
+
+            var checkOutTime = DateTime.Now; // Assuming checkout happens now
+            var totalParkingMinutes = (checkOutTime - parkedVehicle.ArrivalTime).TotalMinutes;
+            var price = totalParkingMinutes; // 1kr per minute
+
+            var viewModel = new KvittoViewModel
+            {
+                RegistrationNumber = parkedVehicle.RegistrationNumber,
+                CheckInTime = parkedVehicle.ArrivalTime,
+                CheckOutTime = checkOutTime,
+                TotalParkingTimeInMinutes = totalParkingMinutes,
+                Price = price
+            };
+
+            return View("Kvitto", viewModel); // Directing to the "Kvitto" view with the ViewModel
+        }
+
+
+        // Delete with regnummer
+        //[HttpPost]
+        /*[ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteByRegistrationNumber(string registrationNumber)
+        {
+            var parkedVehicle = await _context.ParkedVehicle.FirstOrDefaultAsync(v => v.RegistrationNumber == registrationNumber);
+            if (parkedVehicle == null) return NotFound();
+
+            _context.ParkedVehicle.Remove(parkedVehicle);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+        */
+
     }
 }

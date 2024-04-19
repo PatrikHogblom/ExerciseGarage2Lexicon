@@ -1,0 +1,24 @@
+﻿@model ExerciseGarage2Lexicon.Models.KvittoViewModel
+
+@{
+    ViewData["Title"] = "Kvitto";
+}
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Receipt</title>
+</head>
+<body>
+    <h2>Parking Receipt</h2>
+    <div>Registration Number: @Model.RegistrationNumber</div>
+    <div>Check-In Time: @Model.CheckInTime</div>
+    <div>Check-Out Time: @Model.CheckOutTime</div>
+    <div>Total Parking Time: @Model.TotalParkingTimeInMinutes minutes</div>
+    <div>Price: @Model.Price kr</div>
+    <button onclick="window.print()">Print Receipt</button>
+</body>
+</html>
