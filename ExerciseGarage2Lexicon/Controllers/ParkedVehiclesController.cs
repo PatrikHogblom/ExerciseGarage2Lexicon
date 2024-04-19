@@ -162,7 +162,7 @@ namespace ExerciseGarage2Lexicon.Controllers
                 VehicleType = vehicle.VehicleType,
                 RegistrationNumber = vehicle.RegistrationNumber,
                 ArrivalTime = vehicle.ArrivalTime,
-                TotalParkingTime = (DateTime.Now - vehicle.ArrivalTime).TotalMinutes
+                TotalParkingTime = Math.Round((DateTime.Now - vehicle.ArrivalTime).TotalMinutes, 2)
         });
 
             return View(await vehicles.ToListAsync());
