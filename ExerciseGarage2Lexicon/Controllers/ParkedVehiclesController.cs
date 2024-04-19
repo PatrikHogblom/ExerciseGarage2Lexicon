@@ -222,9 +222,9 @@ namespace ExerciseGarage2Lexicon.Controllers
             var parkedVehicle = await _context.ParkedVehicle.FindAsync(id);
             if (parkedVehicle == null) return NotFound();
 
-            var checkOutTime = DateTime.Now; // Assuming checkout happens now
-            var totalParkingMinutes = (checkOutTime - parkedVehicle.ArrivalTime).TotalMinutes;
-            var price = totalParkingMinutes; // 1kr per minute
+            var checkOutTime = DateTime.Now;
+            var totalParkingMinutes = Math.Round((checkOutTime - parkedVehicle.ArrivalTime).TotalMinutes, 2);
+            var price = Math.Round(totalParkingMinutes, 2); // Assuming 1kr per minute
 
             var viewModel = new KvittoViewModel
             {
