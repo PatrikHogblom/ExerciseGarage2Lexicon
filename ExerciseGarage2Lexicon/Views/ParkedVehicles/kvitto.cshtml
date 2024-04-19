@@ -13,13 +13,15 @@
     <title>Receipt</title>
 </head>
 <body>
-    <h2>Parking Receipt</h2>
-    <div>Registration Number: @Model.RegistrationNumber</div>
-    <div>Check-In Time: @Model.CheckInTime</div>
-    <div>Check-Out Time: @Model.CheckOutTime</div>
-    <!-- Format TotalParkingTimeInMinutes and Price to show two decimal places -->
-    <div>Total Parking Time: @Model.TotalParkingTimeInMinutes.ToString("F2") minutes</div>
-    <div>Price: @Model.Price.ToString("F2") kr</div>
-    <button onclick="window.print()">Print Receipt</button>
+    <div class="BoxAroundLayout">
+        <h2>Parking Receipt</h2>
+        <div>Registration Number: @Model.RegistrationNumber</div>
+        <div>Check-In Time: @Model.CheckInTime</div>
+        <div>Check-Out Time: @Model.CheckOutTime</div>
+        <!-- Format TotalParkingTimeInMinutes and Price to show two decimal places -->
+        <div>Total Parking Time: @Model.TotalParkingTimeInMinutes.ToString("F2") minutes</div>
+        <div>Price: @Model.Price.ToString("F2") kr</div>
+        <button onclick="window.print()">Print Receipt</button>
+    </div>
 </body>
 </html>
