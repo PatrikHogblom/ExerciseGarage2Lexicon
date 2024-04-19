@@ -4,6 +4,7 @@ using ExerciseGarage2Lexicon.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExerciseGarage2Lexicon.Migrations
 {
     [DbContext(typeof(ExerciseGarage2LexiconContext))]
-    partial class ExerciseGarage2LexiconContextModelSnapshot : ModelSnapshot
+    [Migration("20240418143305_kvittoUpdates")]
+    partial class kvittoUpdates
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -37,9 +40,6 @@ namespace ExerciseGarage2Lexicon.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CheckOutTime")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Color")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -51,24 +51,15 @@ namespace ExerciseGarage2Lexicon.Migrations
                     b.Property<int>("NumberOfWheels")
                         .HasColumnType("int");
 
-                    b.Property<double>("Price")
-                        .HasColumnType("float");
-
                     b.Property<string>("RegistrationNumber")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<double>("TotalParkingTimeInMinutes")
-                        .HasColumnType("float");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("VehicleType")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("RegistrationNumber")
-                        .IsUnique();
 
                     b.ToTable("ParkedVehicle");
                 });
