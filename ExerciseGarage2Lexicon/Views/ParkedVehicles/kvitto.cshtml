@@ -1,19 +1,21 @@
-﻿
+﻿@model ExerciseGarage2Lexicon.Models.KvittoViewModel
+
 @{
-   
+    ViewData["Title"] = "Kvitto";
 }
 
-@model ParkedVehicle
+
+
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>kvitto</title>
+    <title>Receipt</title>
 </head>
 <body>
     <h2>Parking Receipt</h2>
     <div>Registration Number: @Model.RegistrationNumber</div>
-    <div>Check-In Time: @Model.ArrivalTime</div>
+    <div>Check-In Time: @Model.CheckInTime</div>
     <div>Check-Out Time: @Model.CheckOutTime</div>
     <div>Total Parking Time: @Model.TotalParkingTimeInMinutes minutes</div>
     <div>Price: @Model.Price kr</div>

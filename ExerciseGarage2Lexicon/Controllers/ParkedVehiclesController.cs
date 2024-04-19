@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using ExerciseGarage2Lexicon.Data;
 using ExerciseGarage2Lexicon.Models;
 
+
 namespace ExerciseGarage2Lexicon.Controllers
 {
     public class ParkedVehiclesController : Controller
@@ -154,7 +155,7 @@ namespace ExerciseGarage2Lexicon.Controllers
             return _context.ParkedVehicle.Any(e => e.Id == id);
         }
 
-        // Adding Receipt Generation Logic
+        // Adding Kvitto Generation Logic
         public async Task<IActionResult> CheckoutAndGenerateReceipt(int? id)
         {
             if (id == null) return NotFound();
@@ -166,21 +167,22 @@ namespace ExerciseGarage2Lexicon.Controllers
             var totalParkingMinutes = (checkOutTime - parkedVehicle.ArrivalTime).TotalMinutes;
             var price = totalParkingMinutes; // 1kr per minute
 
-            var viewModel = new ParkedVehicle
+            var viewModel = new KvittoViewModel
             {
                 RegistrationNumber = parkedVehicle.RegistrationNumber,
-                ArrivalTime = parkedVehicle.ArrivalTime,
+                CheckInTime = parkedVehicle.ArrivalTime,
                 CheckOutTime = checkOutTime,
                 TotalParkingTimeInMinutes = totalParkingMinutes,
                 Price = price
             };
 
-            return View(parkedVehicle); 
+            return View("Kvitto", viewModel); // Directing to the "Kvitto" view with the ViewModel
         }
 
+
         // Delete with regnummer
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[HttpPost]
+        /*[ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteByRegistrationNumber(string registrationNumber)
         {
             var parkedVehicle = await _context.ParkedVehicle.FirstOrDefaultAsync(v => v.RegistrationNumber == registrationNumber);
@@ -190,6 +192,7 @@ namespace ExerciseGarage2Lexicon.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+        */
 
     }
 }
