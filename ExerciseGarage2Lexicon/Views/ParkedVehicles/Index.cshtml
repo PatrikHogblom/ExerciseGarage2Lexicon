@@ -4,10 +4,10 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Svenne Garage Parking</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Park your Vehicle</a>
 </p>
 
 <form asp-action="SearchRegNumber" asp-controller="ParkedVehicles" method="get">
@@ -27,10 +27,12 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.VehicleType)
+                @Html.DisplayName("Vehicle Type")
+                @* @Html.DisplayNameFor(model => model.VehicleType) *@
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.RegistrationNumber)
+                @Html.DisplayName("Registration Number")
+                @* @Html.DisplayNameFor(model => model.RegistrationNumber) *@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Color)
@@ -42,10 +44,12 @@
                 @Html.DisplayNameFor(model => model.Model)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.NumberOfWheels)
+                @Html.DisplayName("Number of wheels")
+                @* @Html.DisplayNameFor(model => model.NumberOfWheels) *@
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ArrivalTime)
+                @Html.DisplayName("Arrival Time")
+                @* @Html.DisplayNameFor(model => model.ArrivalTime) *@
             </th>
             <th></th>
         </tr>
@@ -76,9 +80,8 @@
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                  
-                 <a asp-action="CheckoutAndGenerateReceipt" asp-route-id="@item.Id">Checkout</a>
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> | 
+                <a asp-action="CheckoutAndGenerateReceipt" asp-route-id="@item.Id">Checkout</a>
             </td>
         </tr>
 }
