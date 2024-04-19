@@ -111,8 +111,20 @@ namespace ExerciseGarage2Lexicon.Controllers
             ViewBag.MessageType = messageType;
         }
         ////////////////
-        
-         
+
+        // GET: Summary
+        public async Task<IActionResult> Summary()
+        {
+            var vehicles = _context.ParkedVehicle.Select(vehicle => new SummaryViewModel
+            {
+                VehicleType = vehicle.VehicleType,
+                RegistrationNumber = vehicle.RegistrationNumber,
+                ArrivalTime = vehicle.ArrivalTime,
+                TotalParkingTime = (DateTime.Now - vehicle.ArrivalTime).TotalMinutes
+        });
+
+            return View(await vehicles.ToListAsync());
+        }
         // GET: ParkedVehicles/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
