@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<ExerciseGarage2Lexicon.Models.ParkedVehicle>
 
 @{
-    ViewData["Title"] = "ViewEdit";
+    ViewData["Title"] = "ViewDetails";
 }
 
 <div class="BoxAroundLayout">
 
-    <h1>Edit</h1>
-    <form asp-action="SearchEditsRegNumber" asp-controller="ParkedVehicles" method="get">
+    <h1>Details</h1>
+    <form asp-action="SearchDetailsRegNumber" asp-controller="ParkedVehicles" method="get">
         <div class="input-group">
             <input type="text" id="regNumberSearch" name="regNumber" class="form-control" placeholder="Search for registration number" />
             <div class="input-group-append">
@@ -23,9 +23,9 @@
         @if (!string.IsNullOrEmpty(ViewBag.VehicleFound))
         {
             <div class="alert alert-dark text-center">
-                <p class="col">Do you want to edit the vehicle with register number: "@ViewBag.registerNumber:"</p>
-                <a asp-controller="ParkedVehicles" asp-action="Edit" asp-route-id="@ViewBag.VehicleId" class=" btn btn-success">Yes</a>
-                <a asp-controller="ParkedVehicles" asp-action="ViewEdit" class="btn btn-danger">No</a>
+                <p class="col">Do you want to see the details of vechile with register number: "@ViewBag.registerNumber:"</p>
+                <a asp-controller="ParkedVehicles" asp-action="Details" asp-route-id="@ViewBag.VehicleId" class=" btn btn-success">Yes</a>
+                <a asp-controller="ParkedVehicles" asp-action="ViewDetails" class="btn btn-danger">No</a>
             </div>
         }
 

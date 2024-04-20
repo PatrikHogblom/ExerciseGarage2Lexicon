@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<ExerciseGarage2Lexicon.Models.ParkedVehicle>
 
 @{
-    ViewData["Title"] = "ViewEdit";
+    ViewData["Title"] = "ViewKvitto";
 }
 
 <div class="BoxAroundLayout">
 
-    <h1>Edit</h1>
-    <form asp-action="SearchEditsRegNumber" asp-controller="ParkedVehicles" method="get">
+    <h1>Check Out</h1>
+    <form asp-action="SearchKvittoRegNumber" asp-controller="ParkedVehicles" method="get">
         <div class="input-group">
             <input type="text" id="regNumberSearch" name="regNumber" class="form-control" placeholder="Search for registration number" />
             <div class="input-group-append">
@@ -23,9 +23,9 @@
         @if (!string.IsNullOrEmpty(ViewBag.VehicleFound))
         {
             <div class="alert alert-dark text-center">
-                <p class="col">Do you want to edit the vehicle with register number: "@ViewBag.registerNumber:"</p>
-                <a asp-controller="ParkedVehicles" asp-action="Edit" asp-route-id="@ViewBag.VehicleId" class=" btn btn-success">Yes</a>
-                <a asp-controller="ParkedVehicles" asp-action="ViewEdit" class="btn btn-danger">No</a>
+                <p class="col">Do you want to check Out the vehicle with register number: "@ViewBag.registerNumber:"</p>
+                <a asp-controller="ParkedVehicles" asp-action="CheckoutAndGenerateReceipt" asp-route-id="@ViewBag.VehicleId" class=" btn btn-success">Yes</a>
+                <a asp-controller="ParkedVehicles" asp-action="ViewKvitto" class="btn btn-danger">No</a>
             </div>
         }
 

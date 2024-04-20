@@ -22,33 +22,11 @@ namespace ExerciseGarage2Lexicon.Controllers
             _context = context;
         }
 
-        //filter/search a regnumber
         [HttpGet]
-        public async Task<IActionResult> SearchRegNumber(string regNumber)
+        public async Task<IActionResult> SearchVehicle(string regNumber, string viewName)
         {
-            //filter out vehicles according to the reg number
             var model = string.IsNullOrWhiteSpace(regNumber) ? _context.ParkedVehicle :
-                        _context.ParkedVehicle.Where(currVal => currVal.RegistrationNumber.Contains(regNumber.ToUpper().Trim()));
-
-            if (!model.Any())
-            {
-                ViewBag.NoVehiclesFound = "No vehicles found with the specified registration number.";
-            }
-
-            //return View(nameof(Index), await model.ToListAsync());
-            return View(nameof(Index), await model.ToListAsync());
-        }
-
-        private IQueryable<ParkedVehicle> FilterVehiclesByRegNumber(string regNumber)
-        {
-            return string.IsNullOrWhiteSpace(regNumber) ? _context.ParkedVehicle :
                          _context.ParkedVehicle.Where(currVal => currVal.RegistrationNumber.Contains(regNumber.ToUpper().Trim()));
-        }
-
-        public async Task<IActionResult> SearchSingleRegNumber(string regNumber)
-        {
-            //filter out vehicles according to the reg number
-            var model = FilterVehiclesByRegNumber(regNumber);
 
             if (!model.Any() || string.IsNullOrWhiteSpace(regNumber))
             {
@@ -61,7 +39,26 @@ namespace ExerciseGarage2Lexicon.Controllers
                 ViewBag.VehicleId = model.First().Id; // Set the vehicle ID
             }
 
-            return View(nameof(ViewEdit), model);
+            return View(viewName, await model.ToListAsync());
+        }
+
+        public async Task<IActionResult> SearchDatabaseRegNumber(string regNumber)
+        {
+            return await SearchVehicle(regNumber, nameof(Index));
+        }
+        public async Task<IActionResult> SearchEditsRegNumber(string regNumber)
+        {
+            return await SearchVehicle(regNumber, nameof(ViewEdit));
+        }
+
+        public async Task<IActionResult> SearchDetailsRegNumber(string regNumber)
+        {
+            return await SearchVehicle(regNumber, nameof(ViewDetails));
+        }
+
+        public async Task<IActionResult> SearchKvittoRegNumber(string regNumber)
+        {
+            return await SearchVehicle(regNumber, nameof(ViewKvitto));
         }
 
         // GET: ParkedVehicles
@@ -69,6 +66,19 @@ namespace ExerciseGarage2Lexicon.Controllers
         {
             return View();
         }
+
+        public async Task<IActionResult> ViewDetails()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> ViewKvitto()
+        {
+            return View();
+        }
+
+
+
 
         // GET: ParkedVehicles
         public async Task<IActionResult> Index()
