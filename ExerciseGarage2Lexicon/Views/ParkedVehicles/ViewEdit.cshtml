@@ -1,0 +1,33 @@
+﻿@model IEnumerable<ExerciseGarage2Lexicon.Models.ParkedVehicle>
+
+@{
+    ViewData["Title"] = "ViewEdit";
+}
+
+<div class="BoxAroundLayout">
+
+    <h1>Edit</h1>
+    <form asp-action="SearchSingleRegNumber" asp-controller="ParkedVehicles" method="get">
+        <div class="input-group">
+            <input type="text" id="regNumberSearch" name="regNumber" class="form-control" placeholder="Search for registration number" />
+            <div class="input-group-append">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+        </div>
+
+        @if (!string.IsNullOrEmpty(ViewBag.NoVehicleFound))
+        {
+            <p class="alert alert-danger">@ViewBag.NoVehicleFound</p>
+        }
+
+        @if (!string.IsNullOrEmpty(ViewBag.VehicleFound))
+        {
+            <div class="alert alert-dark text-center">
+                <p class="col">Do you want to edit the vehicle with register number: "@ViewBag.registerNumber:"</p>
+                <a asp-controller="ParkedVehicles" asp-action="Edit" asp-route-id="@ViewBag.VehicleId" class=" btn btn-success">Yes</a>
+                <a asp-controller="ParkedVehicles" asp-action="ViewEdit" class="btn btn-danger">No</a>
+            </div>
+        }
+
+    </form>
+</div>

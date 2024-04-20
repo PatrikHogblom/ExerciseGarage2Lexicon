@@ -35,7 +35,39 @@ namespace ExerciseGarage2Lexicon.Controllers
                 ViewBag.NoVehiclesFound = "No vehicles found with the specified registration number.";
             }
 
+            //return View(nameof(Index), await model.ToListAsync());
             return View(nameof(Index), await model.ToListAsync());
+        }
+
+        private IQueryable<ParkedVehicle> FilterVehiclesByRegNumber(string regNumber)
+        {
+            return string.IsNullOrWhiteSpace(regNumber) ? _context.ParkedVehicle :
+                         _context.ParkedVehicle.Where(currVal => currVal.RegistrationNumber.Contains(regNumber.ToUpper().Trim()));
+        }
+
+        public async Task<IActionResult> SearchSingleRegNumber(string regNumber)
+        {
+            //filter out vehicles according to the reg number
+            var model = FilterVehiclesByRegNumber(regNumber);
+
+            if (!model.Any() || string.IsNullOrWhiteSpace(regNumber))
+            {
+                ViewBag.NoVehicleFound = "No vehicles found with the specified registration number.";
+            }
+            else
+            {
+                ViewBag.RegisterNumber = model.First().RegistrationNumber;
+                ViewBag.VehicleFound = $"Vehicle with ID {model.First().Id} found.";
+                ViewBag.VehicleId = model.First().Id; // Set the vehicle ID
+            }
+
+            return View(nameof(ViewEdit), model);
+        }
+
+        // GET: ParkedVehicles
+        public async Task<IActionResult> ViewEdit()
+        {
+            return View();
         }
 
         // GET: ParkedVehicles
