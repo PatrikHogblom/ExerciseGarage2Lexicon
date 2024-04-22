@@ -136,7 +136,6 @@ namespace ExerciseGarage2Lexicon.Controllers
             }
         }
 
-        // HELPER METHODS TO BE REMOVED TO OTHER FILE??
         private FeedbackViewModel GetFeedback(string messageType, string message)
         {
             // Prepare a feedback message
@@ -152,7 +151,6 @@ namespace ExerciseGarage2Lexicon.Controllers
             ViewBag.Message = message;
             ViewBag.MessageType = messageType;
         }
-        ////////////////
 
         // GET: Summary
         public async Task<IActionResult> Summary()
@@ -162,7 +160,7 @@ namespace ExerciseGarage2Lexicon.Controllers
                 VehicleType = vehicle.VehicleType,
                 RegistrationNumber = vehicle.RegistrationNumber,
                 ArrivalTime = vehicle.ArrivalTime,
-                TotalParkingTime = (DateTime.Now - vehicle.ArrivalTime).TotalMinutes
+                TotalParkingTime = DateTime.Now - vehicle.ArrivalTime
         });
 
             return View(await vehicles.ToListAsync());

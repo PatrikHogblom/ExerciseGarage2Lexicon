@@ -3,43 +3,44 @@
 @{
     ViewData["Title"] = "Overview";
 }
+<div class="BoxAroundLayout">
+    <h2 class="mb-4">Overview of vehicles in garage</h2>
 
-<h2 class="mb-4">Overview of vehicles in garage</h2>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.VehicleType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RegistrationNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ArrivalTime)
-            </th>
-            <th class="text-danger">
-                @Html.DisplayNameFor(model => model.TotalParkingTime)
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+    <table class="table">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.VehicleType)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.RegistrationNumber)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ArrivalTime)
-                </td>
-                <td class="text-danger">
-                    @Html.DisplayFor(modelItem => item.TotalParkingTime)
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.VehicleType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.RegistrationNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ArrivalTime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TotalParkingTime)
+                </th>
             </tr>
-         }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VehicleType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RegistrationNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ArrivalTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DisplayTime)
+                    </td>
+                </tr>
+             }
+        </tbody>
+    </table>
+</div>
