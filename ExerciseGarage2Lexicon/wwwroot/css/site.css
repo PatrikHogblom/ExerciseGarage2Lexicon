@@ -53,17 +53,17 @@ h1, h2, h3, h4, h5, h6 {
 
 
 /* Stärker färgen på länkar för "Edit", "Details" och "UnPark" */
-a[href*="Edit"] {
+a[href*="ViewEdit"] {
     color: blue;
     font-weight: bold;
 }
 
-a[href*="Detail"] {
+a[href*="ViewDetails"] {
     color: blue;
     font-weight: bold;
 }
 
-a[href*="CheckOut"] {
+a[href*="ViewKvitto"] {
     color: blue;
     font-weight: bold;
 }
