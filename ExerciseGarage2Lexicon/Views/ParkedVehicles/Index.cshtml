@@ -85,6 +85,23 @@
         </tbody>
     </table>
 
+    @if (!string.IsNullOrEmpty(ViewBag.NoVehicleFound))
+    {
+        <p class="alert alert-danger">@ViewBag.NoVehicleFound</p>
+    }
+
+  @*   @if (ViewBag != null)
+    {
+        ViewBag.Clear(); // Tömmer TempData efter att meddelandet har visats
+    } *@
+
+    @*@if (!string.IsNullOrEmpty(ViewBag.VehicleFound))
+    {
+        <div class="alert alert-dark text-center">
+            <p class="col">No Vehicles found</p>
+        </div>
+    }*@
+    @*
     @if (TempData["Message"] != null)
     {
         <div class="alert alert-success" role="alert">
@@ -96,5 +113,5 @@
         <div class="alert alert-danger" role="alert">
             @TempData["Error"]
         </div>
-    }
+    }*@
 </div>
