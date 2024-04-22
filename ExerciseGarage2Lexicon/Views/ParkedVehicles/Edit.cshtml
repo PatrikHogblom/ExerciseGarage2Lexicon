@@ -42,6 +42,13 @@
                     <input asp-for="NumberOfWheels" class="form-control" />
                     <span asp-validation-for="NumberOfWheels" class="text-danger"></span>
                 </div>
+                <!--don't remove this, make this hidden if you don't want to show arrival time in edit,  this need to be here since when clicked saved then the arrival time is once again sent to 
+                database when we edit it or else it will get 0001-00-00 00:00:00-->
+                <div class="form-group">
+                    <label asp-for="ArrivalTime" class="control-label"></label>
+                    <input asp-for="ArrivalTime" class="form-control" readonly />
+                    <span asp-validation-for="ArrivalTime" class="text-danger"></span>
+                </div>
                 <div class="form-group">
                     <input type="submit" value="Save" class="btn btn-primary" />
                 </div>
