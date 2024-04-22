@@ -73,6 +73,11 @@ a[href*="Create"] {
     font-weight: bold;
 }
 
+a[href*="Summary"] {
+    color: blue;
+    font-weight: bold;
+}
+
 a[href*="OverviewParkedVehciles"] {
     color: blue;
     font-weight: bold;
