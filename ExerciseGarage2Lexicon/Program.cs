@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using ExerciseGarage2Lexicon.Data;
 using ExerciseGarage2Lexicon.Models;
 using System.Configuration;
+using ExerciseGarage2Lexicon.Services;
 namespace ExerciseGarage2Lexicon
 {
     public class Program
@@ -15,8 +16,15 @@ namespace ExerciseGarage2Lexicon
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddSingleton<IPriceService, PriceService>();
 
             var app = builder.Build();
+
+
+            //set the inital price of parkinglot
+            var initalPrice = 1.0;
+            var priceService = app.Services.GetRequiredService<IPriceService>();
+            priceService.SetPrice(initalPrice);
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())

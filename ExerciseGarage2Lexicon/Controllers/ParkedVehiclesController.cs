@@ -9,6 +9,7 @@ using ExerciseGarage2Lexicon.Data;
 using ExerciseGarage2Lexicon.Models;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using ExerciseGarage2Lexicon.Models.ViewModels;
+using ExerciseGarage2Lexicon.Services;
 
 
 namespace ExerciseGarage2Lexicon.Controllers
@@ -16,10 +17,12 @@ namespace ExerciseGarage2Lexicon.Controllers
     public class ParkedVehiclesController : Controller
     {
         private readonly ExerciseGarage2LexiconContext _context;
+        private readonly IPriceService _priceService;// get the price
 
-        public ParkedVehiclesController(ExerciseGarage2LexiconContext context)
+        public ParkedVehiclesController(ExerciseGarage2LexiconContext context, IPriceService priceService)
         {
             _context = context;
+            _priceService = priceService;
         }
 
         [HttpGet]
@@ -265,7 +268,7 @@ namespace ExerciseGarage2Lexicon.Controllers
             if (parkedVehicle == null) return NotFound();
 
             var checkOutTime = DateTime.Now;
-            var totalParkingMinutes = Math.Round((checkOutTime - parkedVehicle.ArrivalTime).TotalMinutes, 2);
+            var totalParkingMinutes = Math.Round((checkOutTime - parkedVehicle.ArrivalTime).TotalMinutes * _priceService.GetPrice(), 2);
             var price = Math.Round(totalParkingMinutes, 2); // Assuming 1kr per minute
 
             var viewModel = new KvittoViewModel

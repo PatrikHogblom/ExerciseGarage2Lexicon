@@ -1,0 +1,32 @@
+﻿@model ExerciseGarage2Lexicon.Models.ViewModels.OverviewStatictics
+
+
+@{
+    ViewData["Title"] = "Statistics";
+}
+
+<div class="BoxAroundLayout">
+    <h1>Statistics</h1>
+    <p>Vehicle Type Counts</p>
+    <table class="table table-bordered ">
+        <thead>
+            <tr class="table-active">
+                <th scope="col">Vehicle Type</th>
+                <th scope ="col">Count</th>
+            </tr>
+        </thead>
+        @foreach (var kvp in Model.VehicleTypeCounts)
+        {
+            <tbody>
+                <tr>
+                    <td>@kvp.Key</td>
+                    <td>@kvp.Value</td>
+                </tr>
+            </tbody>
+        }
+    </table>
+    <p>Total Wheels count: @Model.TotWheels</p>
+    <p>Total Income: @Model.TotMoneyFromVehicles kr</p>
+
+</div>
+
