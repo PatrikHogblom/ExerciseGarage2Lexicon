@@ -22,6 +22,20 @@
         <div>Total Parking Time: @Model.TotalParkingTimeInMinutes.ToString("F2") minutes</div>
         <div>Price: @Model.Price.ToString("F2") kr</div>
         <button onclick="window.print()">Print Receipt</button>
+
+
+        @if (TempData["Message"] != null)
+        {
+            <div class="alert alert-success" role="alert">
+                @TempData["Message"]
+            </div>
+        }
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert alert-danger" role="alert">
+                @TempData["Error"]
+            </div>
+        }
     </div>
 </body>
 </html>

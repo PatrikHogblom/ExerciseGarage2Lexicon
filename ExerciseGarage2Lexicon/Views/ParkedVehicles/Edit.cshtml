@@ -39,7 +39,7 @@
                 </div>
                 <div class="form-group">
                     <label for="NumberOfWheels" class="control-label">Number Of Wheels</label>
-                    <input asp-for="NumberOfWheels" class="form-control" />
+                    <input asp-for="NumberOfWheels" class="form-control" min="0"/>
                     <span asp-validation-for="NumberOfWheels" class="text-danger"></span>
                 </div>
                 <!--don't remove this, make this hidden if you don't want to show arrival time in edit,  this need to be here since when clicked saved then the arrival time is once again sent to 

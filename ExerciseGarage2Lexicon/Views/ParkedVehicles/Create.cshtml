@@ -46,7 +46,7 @@
                 </div>
                 <div class="form-group">
                     <label for="NumberOfWheels" class="control-label">Number Of Wheels</label>
-                    <input asp-for="NumberOfWheels" class="form-control" />
+                    <input asp-for="NumberOfWheels" class="form-control" min="0"/>
                     <span asp-validation-for="NumberOfWheels" class="text-danger"></span>
                 </div>
                 <!--made so we can't see the arrivaltime on the site, but part of code is needed so that we don't get 0001-00-00 00:00:00 datetime in database, 

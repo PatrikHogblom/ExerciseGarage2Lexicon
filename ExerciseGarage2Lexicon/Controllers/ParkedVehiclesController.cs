@@ -139,7 +139,6 @@ namespace ExerciseGarage2Lexicon.Controllers
             }
         }
 
-        // HELPER METHODS TO BE REMOVED TO OTHER FILE??
         private FeedbackViewModel GetFeedback(string messageType, string message)
         {
             // Prepare a feedback message
@@ -155,7 +154,6 @@ namespace ExerciseGarage2Lexicon.Controllers
             ViewBag.Message = message;
             ViewBag.MessageType = messageType;
         }
-        ////////////////
 
         // GET: Summary
         public async Task<IActionResult> Summary()
@@ -165,7 +163,7 @@ namespace ExerciseGarage2Lexicon.Controllers
                 VehicleType = vehicle.VehicleType,
                 RegistrationNumber = vehicle.RegistrationNumber,
                 ArrivalTime = vehicle.ArrivalTime,
-                TotalParkingTime = (DateTime.Now - vehicle.ArrivalTime).TotalMinutes
+                TotalParkingTime = DateTime.Now - vehicle.ArrivalTime
         });
 
             return View(await vehicles.ToListAsync());
@@ -248,6 +246,15 @@ namespace ExerciseGarage2Lexicon.Controllers
             if (parkedVehicle != null)
             {
                 _context.ParkedVehicle.Remove(parkedVehicle);
+                await _context.SaveChangesAsync();
+
+                // Lägg till ett meddelande i TempData för att visa på nästa vy
+                TempData["Message"] = "Vehicle successfully unparked.";
+            }
+            else
+            {
+                // Lägg till felmeddelande i TempData om fordonet inte hittades
+                TempData["Error"] = "Failed to unpark vehicle.";
             }
 
             await _context.SaveChangesAsync();
@@ -273,12 +280,17 @@ namespace ExerciseGarage2Lexicon.Controllers
 
             var viewModel = new KvittoViewModel
             {
+                Id = parkedVehicle.Id, // Tilldela id här
                 RegistrationNumber = parkedVehicle.RegistrationNumber,
                 CheckInTime = parkedVehicle.ArrivalTime,
                 CheckOutTime = checkOutTime,
                 TotalParkingTimeInMinutes = totalParkingMinutes,
                 Price = price
             };
+
+            // Delete the parked vehicle after generating the receipt
+            await DeleteConfirmed(id.Value);
+
 
             return View("Kvitto", viewModel); // Directing to the "Kvitto" view with the ViewModel
         }

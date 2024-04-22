@@ -2,6 +2,7 @@
 {
     public class KvittoViewModel
     {
+        public int Id { get; set; }
         public string RegistrationNumber { get; set; }
         public DateTime CheckInTime { get; set; }
         public DateTime CheckOutTime { get; set; }
