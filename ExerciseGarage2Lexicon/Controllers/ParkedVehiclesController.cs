@@ -14,7 +14,7 @@ using ExerciseGarage2Lexicon.Models.ViewModels;
 namespace ExerciseGarage2Lexicon.Controllers
 {
     public class ParkedVehiclesController : Controller
-    {
+    { 
         private readonly ExerciseGarage2LexiconContext _context;
 
         public ParkedVehiclesController(ExerciseGarage2LexiconContext context)
@@ -190,7 +190,8 @@ namespace ExerciseGarage2Lexicon.Controllers
         {
             if (id != parkedVehicle.Id)
             {
-                return NotFound();
+                SetFeedback("danger", "No vehicle found!");
+                return View();
             }
 
             if (ModelState.IsValid)
@@ -204,16 +205,17 @@ namespace ExerciseGarage2Lexicon.Controllers
                 {
                     if (!ParkedVehicleExists(parkedVehicle.Id))
                     {
-                        return NotFound();
+                        SetFeedback("danger", "No vehicle with given registration found.");
+                        return View();
                     }
                     else
                     {
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
             }
-            return View(parkedVehicle);
+            SetFeedback("success", "Vehicle was successfully edited!");
+            return View();
         }
 
         // GET: ParkedVehicles/Delete/5
@@ -246,12 +248,12 @@ namespace ExerciseGarage2Lexicon.Controllers
                 await _context.SaveChangesAsync();
 
                 // Lägg till ett meddelande i TempData för att visa på nästa vy
-                TempData["Message"] = "Vehicle successfully unparked.";
+                SetFeedback("success", "Vehicle successfully unparked");
             }
             else
             {
                 // Lägg till felmeddelande i TempData om fordonet inte hittades
-                TempData["Error"] = "Failed to unpark vehicle.";
+                SetFeedback("danger", "Failed to unpark vehicle.");
             }
 
             await _context.SaveChangesAsync();
