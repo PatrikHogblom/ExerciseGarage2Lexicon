@@ -83,6 +83,11 @@ a[href*="OverviewParkedVehciles"] {
     font-weight: bold;
 }
 
+a[href*="Statistics"] {
+    color: blue;
+    font-weight: bold;
+}
+
 /* Ändra färgen när användaren hovrar över länkar */
 a[href*="Edit"]:hover {
     color: #0056b3; /* Mörkare nyans av blått för hover-effekt på Edit-länkar */
