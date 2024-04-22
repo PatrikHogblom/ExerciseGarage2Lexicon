@@ -13,7 +13,9 @@ namespace ExerciseGarage2Lexicon.Models.ViewModels
         [Display(Name = "Arrival Time")]
         public DateTime ArrivalTime { get; set; }
 
-        [Display(Name = "Minutes Parked")]
-        public double TotalParkingTime { get; set; } 
+        [Display(Name = "Time Parked")]
+        public TimeSpan TotalParkingTime { get; set; }
+
+        public string DisplayTime => $"{TotalParkingTime.Days} days, {TotalParkingTime.Hours} h {TotalParkingTime.Minutes} min";
     }
 }
