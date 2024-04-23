@@ -29,7 +29,7 @@ namespace ExerciseGarage2Lexicon.Controllers
         public async Task<IActionResult> SearchVehicle(string regNumber, string viewName)
         {
             var model = string.IsNullOrWhiteSpace(regNumber) ? _context.ParkedVehicle :
-                         _context.ParkedVehicle.Where(currVal => currVal.RegistrationNumber.Contains(regNumber.ToUpper().Trim()));
+                         _context.ParkedVehicle.Where(currVal => currVal.RegistrationNumber == regNumber.ToUpper().Trim());
 
             if (!model.Any() || string.IsNullOrWhiteSpace(regNumber))
             {
@@ -123,7 +123,7 @@ namespace ExerciseGarage2Lexicon.Controllers
             try {
                 if (ModelState.IsValid)
                 {
-                    parkedVehicle.RegistrationNumber = parkedVehicle.RegistrationNumber.ToUpper();
+                    parkedVehicle.RegistrationNumber = parkedVehicle.RegistrationNumber.ToUpper().Trim();
                     _context.Add(parkedVehicle);
                     await _context.SaveChangesAsync();
                 
